@@ -1,5 +1,5 @@
 import { useAuth } from '../contexts/AuthContext';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 function getSignInErrorMessage(error) {
@@ -82,6 +82,9 @@ function Login() {
         )}
 
         <div className="login-footer">
+          <p>
+            Don't have an account? <Link to="/signup">Sign up</Link>
+          </p>
           <p>
             By signing in, you agree to our Terms of Service and Privacy Policy.
           </p>

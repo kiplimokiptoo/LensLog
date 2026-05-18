@@ -47,5 +47,24 @@
    npm test
    ```
 
+## GitHub Pages Deployment
+
+To deploy to GitHub Pages, you need to add the following secrets to your GitHub repository:
+
+1. Go to your repository Settings → Secrets and variables → Actions
+2. Add these repository secrets:
+   - `VITE_FIREBASE_API_KEY`
+   - `VITE_FIREBASE_AUTH_DOMAIN`
+   - `VITE_FIREBASE_PROJECT_ID`
+   - `VITE_FIREBASE_STORAGE_BUCKET`
+   - `VITE_FIREBASE_MESSAGING_SENDER_ID`
+   - `VITE_FIREBASE_APP_ID`
+   - `VITE_TMDB_API_KEY`
+
+3. Enable GitHub Pages in Settings → Pages, select "GitHub Actions" as the source
+4. Push to main branch to trigger deployment
+
+**Note:** The Vite config is set to use `/LensLog/` as the base path for production. If your repository name is different, update the `base` path in `vite.config.js` to match your repository name.
+
 ## Version
 `v1.0.0`
