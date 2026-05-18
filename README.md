@@ -6,13 +6,13 @@
 - React + React Router
 - Firebase (Auth + Firestore)
 - TMDB API
-- GitHub Actions (CI/CD)
+- Netlify (Deployment)
 - Jest + React Testing Library
 
 ## Project Objectives
 1. React routing across multiple pages
 2. Authentication / social Auth (Google via Firebase)
-3. Deployment through GitHub Actions
+3. Deployment through Netlify
 4. Fully responsive design
 5. Data persistence via Firestore without localStorage or browser caching
 6. 30% test coverage
@@ -47,12 +47,17 @@
    npm test
    ```
 
-## GitHub Pages Deployment
+## Netlify Deployment
 
-To deploy to GitHub Pages, you need to add the following secrets to your GitHub repository:
+This repository includes `netlify.toml`, so Netlify can detect the build command and publish directory automatically.
 
-1. Go to your repository Settings → Secrets and variables → Actions
-2. Add these repository secrets:
+1. Import the GitHub repository in Netlify.
+2. Use these build settings:
+   ```bash
+   Build command: npm run build
+   Publish directory: dist
+   ```
+3. Add these environment variables in Netlify under Site configuration → Environment variables:
    - `VITE_FIREBASE_API_KEY`
    - `VITE_FIREBASE_AUTH_DOMAIN`
    - `VITE_FIREBASE_PROJECT_ID`
@@ -60,11 +65,10 @@ To deploy to GitHub Pages, you need to add the following secrets to your GitHub 
    - `VITE_FIREBASE_MESSAGING_SENDER_ID`
    - `VITE_FIREBASE_APP_ID`
    - `VITE_TMDB_API_KEY`
-
-3. Enable GitHub Pages in Settings → Pages, select "GitHub Actions" as the source
-4. Push to main branch to trigger deployment
-
-**Note:** The Vite config is set to use `/LensLog/` as the base path for production. If your repository name is different, update the `base` path in `vite.config.js` to match your repository name.
+4. Add your Netlify domain to Firebase Authentication:
+   - Firebase Console → Authentication → Settings → Authorized domains
+   - Add your generated `*.netlify.app` domain and any custom domain you connect later.
+5. Deploy from Netlify. The included redirect rule serves `index.html` for client-side routes like `/search`, `/discover`, and `/profile`.
 
 ## Version
 `v1.0.0`

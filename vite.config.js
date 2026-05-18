@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => {
   );
 
   return {
-    base: mode === 'production' ? '/LensLog/' : '/',
+    base: '/',
     plugins: [react()],
     define: {
       'process.env.NODE_ENV': JSON.stringify(mode),
