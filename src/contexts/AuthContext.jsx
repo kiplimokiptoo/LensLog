@@ -19,6 +19,8 @@ async function loadAuthClient() {
           provider: firebase.provider,
           onAuthStateChanged: authSdk.onAuthStateChanged,
           signInWithPopup: authSdk.signInWithPopup,
+          signInWithEmailAndPassword: authSdk.signInWithEmailAndPassword,
+          createUserWithEmailAndPassword: authSdk.createUserWithEmailAndPassword,
           signOut: authSdk.signOut,
         };
       }
@@ -63,13 +65,23 @@ export function AuthProvider({ children }) {
     await signInWithPopup(auth, provider);
   };
 
+  const signInWithEmail = async (email, password) => {
+    const { auth, signInWithEmailAndPassword } = await loadAuthClient();
+    await signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const signUpWithEmail = async (email, password) => {
+    const { auth, createUserWithEmailAndPassword } = await loadAuthClient();
+    await createUserWithEmailAndPassword(auth, email, password);
+  };
+
   const signOutUser = async () => {
     const { auth, signOut } = await loadAuthClient();
     await signOut(auth);
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signOutUser }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signInWithEmail, signUpWithEmail, signOutUser }}>
       {children}
     </AuthContext.Provider>
   );
